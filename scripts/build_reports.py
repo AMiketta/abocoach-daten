@@ -27,6 +27,28 @@ def num(s):
     try: return round(float(str(s).replace(",", ".").replace("€", "").strip()), 4)
     except ValueError: return None
 
+RESOLVED = {"uebernommen": "uebernommen", "abgelehnt": "abgelehnt"}
+RESOLVED_DAYS = 180
+
+def resolved_entries(issues, now):
+    """Geschlossene Preis-Issues mit Ergebnis (übernommen/abgelehnt) der letzten 180 Tage: nur reportId, Nr., Status."""
+    try:
+        cutoff = (datetime.datetime.strptime(now[:10], "%Y-%m-%d") - datetime.timedelta(days=RESOLVED_DAYS)).strftime("%Y-%m-%d")
+    except ValueError:
+        cutoff = ""
+    out = []
+    for it in issues:
+        if "pull_request" in it or it.get("state") != "closed": continue
+        labels = {l["name"] for l in it.get("labels", [])}
+        if "preis-korrektur" not in labels or "namensentfernung" in labels: continue
+        status = next((RESOLVED[l] for l in ("uebernommen", "abgelehnt") if l in labels), None)
+        closed = (it.get("closed_at") or "")[:10]
+        if status is None or closed < cutoff: continue
+        rid = parse_body(it.get("body")).get("reportId", "").strip()
+        if not re.fullmatch(r"r-[0-9a-f]{4,16}", rid): continue
+        out.append({"reportId": rid, "issue": it["number"], "status": status, "closedAt": closed})
+    return sorted(out, key=lambda e: e["issue"])
+
 def build(issues, now):
     groups = {}
     for it in issues:
@@ -60,7 +82,7 @@ def build(issues, now):
     reports = []
     for g in sorted(groups.values(), key=lambda g: (g["tariffId"], g["cpo"], g["chargeType"], g["field"])):
         g.pop("_latest"); g["issues"].sort(); reports.append(g)
-    return {"schema": "abocoach.reports/1", "generatedAt": now, "reports": reports}
+    return {"schema": "abocoach.reports/1", "generatedAt": now, "reports": reports, "resolved": resolved_entries(issues, now)}
 
 if __name__ == "__main__":
     issues = json.load(open(sys.argv[1], encoding="utf-8"))
