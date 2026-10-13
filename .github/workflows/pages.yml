@@ -1,0 +1,96 @@
+name: Daten veröffentlichen
+
+# Baut die statische Seite für die App (GitHub Pages):
+#   tariffs.json, network-prices.json  – aus data/ (nur per geprüftem PR geändert)
+#   reports.json                        – aus offenen Issues mit Label `preis-korrektur` (aggregiert)
+#   stations.txt, evse-prefix.json      – aus dem BNetzA-Ladesäulenregister (CC BY 4.0, Quelle: Bundesnetzagentur.de)
+# Stationsdaten werden monatlich bzw. auf Wunsch neu erzeugt, sonst von der letzten Veröffentlichung übernommen.
+
+on:
+  push:
+    branches: [main]
+  issues:
+    types: [opened, edited, labeled, unlabeled, closed, reopened, deleted]
+  schedule:
+    - cron: "17 5 3 * *"    # monatlich: Register neu (BNetzA aktualisiert monatlich)
+    - cron: "40 4 * * *"    # täglich: reports.json auffrischen
+  workflow_dispatch:
+    inputs:
+      rebuild_stations:
+        description: "Stationsdaten neu aus dem Register erzeugen"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  PAGES_URL: https://amiketta.github.io/abocoach-daten
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Preisdateien prüfen
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+          for f in data/tariffs.json data/network-prices.json data/reports.json; do python3 -m json.tool "$f" > /dev/null; done
+          mkdir -p site
+          cp data/tariffs.json data/network-prices.json site/
+      - name: reports.json aus Issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp "repos/${{ github.repository }}/issues?state=open&labels=preis-korrektur&per_page=100" > issues.json
+          python3 scripts/build_reports.py issues.json site/reports.json
+      - name: Stationsdaten
+        run: |
+          rebuild=false
+          if [ "${{ github.event.schedule }}" = "17 5 3 * *" ] || [ "${{ inputs.rebuild_stations }}" = "true" ]; then rebuild=true; fi
+          if [ "$rebuild" = false ]; then
+            curl -fsSL -o site/stations.txt "$PAGES_URL/stations.txt" && curl -fsSL -o site/evse-prefix.json "$PAGES_URL/evse-prefix.json" \
+              && head -c 2 site/stations.txt | grep -q '^H|' || rebuild=true
+          fi
+          if [ "$rebuild" = true ]; then
+            scripts/fetch_register.sh register.csv
+            python3 scripts/build_stations.py register.csv data/operator-aliases.json site
+          fi
+          size=$(stat -c %s site/stations.txt)
+          [ "$size" -lt 4000000 ] || { echo "stations.txt zu groß: $size Byte" >&2; exit 1; }
+      - name: Startseite
+        run: |
+          cat > site/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><title>Abo-Coach Daten</title>
+          <h1>Abo-Coach Daten</h1>
+          <ul><li><a href="tariffs.json">tariffs.json</a></li><li><a href="network-prices.json">network-prices.json</a></li>
+          <li><a href="reports.json">reports.json</a></li><li><a href="stations.txt">stations.txt</a></li><li><a href="evse-prefix.json">evse-prefix.json</a></li></ul>
+          <p>Stationsdaten: Bundesnetzagentur.de, Ladesäulenregister, Lizenz CC BY 4.0 (verarbeitet: gefiltert, zusammengefasst, kodiert).
+          Preise ohne Gewähr. <a href="https://github.com/AMiketta/abocoach-daten">Quelle &amp; Meldungen</a></p>
+          HTML
+          echo "| Datei | Byte |" >> "$GITHUB_STEP_SUMMARY"; echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          for f in site/*; do echo "| $(basename $f) | $(stat -c %s $f) |" >> "$GITHUB_STEP_SUMMARY"; done
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

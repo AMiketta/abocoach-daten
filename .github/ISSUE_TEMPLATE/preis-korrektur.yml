@@ -1,0 +1,68 @@
+name: Preis-Korrektur
+description: Ein Preis in Abo-Coach stimmt nicht (Format abocoach.correction/1)
+title: "Preis: "
+labels: ["preis-korrektur", "neu"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke! Die App füllt die Felder vor. Übernommen wird ein Wert **nur mit öffentlicher Anbieterquelle** (Preisseite/Preisblatt des Anbieters).
+        Bis dahin zeigt die App „von Nutzern gemeldet, in Prüfung“ und rechnet weiter mit dem geprüften Wert.
+        **Bitte keine personenbezogenen Daten.** Fotos können Standortdaten (EXIF/GPS) enthalten – lieber Screenshot oder Quellen-URL.
+  - type: input
+    id: tariffId
+    attributes: {label: "Tarif-ID (tariffId)", description: "aus tariffs.json, z. B. enbw-m"}
+    validations: {required: true}
+  - type: input
+    id: cpo
+    attributes: {label: "Betreiber (cpo)", description: "CPO-Schlüssel, z. B. enbw; * = Roaming/alle übrigen"}
+    validations: {required: true}
+  - type: input
+    id: cpoName
+    attributes: {label: "Betreibername, falls nicht in der Liste (cpoName)"}
+  - type: input
+    id: chargeType
+    attributes: {label: "Ladeart (chargeType)", description: "AC oder DC"}
+    validations: {required: true}
+  - type: input
+    id: field
+    attributes: {label: "Feld (field)", description: "pricePerKwh, monthlyFee oder blockingFee"}
+    validations: {required: true}
+  - type: input
+    id: reportedValue
+    attributes: {label: "Richtiger Wert in € brutto (reportedValue)", placeholder: "0.49"}
+    validations: {required: true}
+  - type: input
+    id: appValue
+    attributes: {label: "Wert in der App (appValue)", description: "leer = unbekannt"}
+  - type: input
+    id: observedAt
+    attributes: {label: "Gesehen am (observedAt)", placeholder: "2026-10-13"}
+    validations: {required: true}
+  - type: input
+    id: sourceUrl
+    attributes: {label: "Anbieterquelle (sourceUrl)", description: "öffentliche Preisseite oder Preisblatt des Anbieters"}
+  - type: input
+    id: evseId
+    attributes: {label: "EVSE-ID (evseId)", description: "nur wenn du die Säule mitsenden willst"}
+  - type: textarea
+    id: comment
+    attributes: {label: "Kommentar (comment)", description: "max. 300 Zeichen"}
+  - type: input
+    id: reportId
+    attributes: {label: "Meldungs-ID (reportId)", description: "von der App erzeugt, nicht ändern"}
+  - type: input
+    id: dataAsOf
+    attributes: {label: "Datenstand der App (dataAsOf)"}
+  - type: input
+    id: appVersion
+    attributes: {label: "App-Version (appVersion)"}
+  - type: upload
+    id: photo
+    attributes: {label: "Foto/Screenshot (photo, optional)"}
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Datenschutz
+      options:
+        - label: Mein Foto/Screenshot enthält keine personenbezogenen Daten.

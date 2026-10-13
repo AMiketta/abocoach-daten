@@ -1,0 +1,13 @@
+{
+  "_comment": "Betreiber im BNetzA-Register (Feld 'Betreiber', exakt oder Regex) -> CPO-Schlüssel der Preistabelle. Nur eindeutig belegbare Zuordnungen; alles andere gilt als Fremdnetz (Roaming).",
+  "aliases": [
+    {"key": "enbw",   "name": "EnBW",           "match": "^EnBW mobility\\+ AG"},
+    {"key": "ionity", "name": "IONITY",         "match": "^IONITY GmbH"},
+    {"key": "aral",   "name": "Aral pulse (BP)", "match": "^BP Europa SE", "note": "Aral pulse wird von BP Europa SE betrieben (Einschätzung, Marke im Register nicht genannt)"},
+    {"key": "shell",  "name": "Shell Recharge", "match": "^Shell Deutschland GmbH"},
+    {"key": "ewe-go", "name": "EWE Go",         "match": "^EWE Go "},
+    {"key": "swb",    "name": "swb",            "match": "^swb Vertrieb Bremen GmbH"},
+    {"key": "tesla",  "name": "Tesla Supercharger", "match": "^Tesla (Germany GmbH|Manufacturing Brandenburg SE)"},
+    {"key": "maingau","name": "MAINGAU",        "match": "^MAINGAU Energie GmbH"}
+  ]
+}

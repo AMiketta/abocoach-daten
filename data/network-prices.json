@@ -1,0 +1,215 @@
+{
+ "schemaVersion": 1,
+ "dataAsOf": "2026-10-13",
+ "entries": [
+  {
+   "tariffId": "enbw-s",
+   "cpo": "enbw",
+   "ac": 0.56,
+   "dc": 0.56,
+   "sourceUrl": "https://www.enbw.com/elektromobilitaet/produkte/ladetarife",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "ab 240 min 0,10 €/min, max. 12 €",
+   "note": "Eigenes Netz. Preise an fremden Säulen nicht belegt → unbekannt."
+  },
+  {
+   "tariffId": "enbw-m",
+   "cpo": "enbw",
+   "ac": 0.46,
+   "dc": 0.46,
+   "sourceUrl": "https://www.enbw.com/elektromobilitaet/produkte/ladetarife",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "ab 240 min 0,10 €/min, max. 12 €",
+   "note": "Eigenes Netz. Preise an fremden Säulen nicht belegt → unbekannt."
+  },
+  {
+   "tariffId": "enbw-l",
+   "cpo": "enbw",
+   "ac": 0.39,
+   "dc": 0.39,
+   "sourceUrl": "https://www.enbw.com/elektromobilitaet/produkte/ladetarife",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "ab 240 min 0,10 €/min, max. 12 €",
+   "note": "Eigenes Netz. Preise an fremden Säulen nicht belegt → unbekannt."
+  },
+  {
+   "tariffId": "maingau-autostrom",
+   "cpo": "*",
+   "sourceUrl": "https://www.maingau-energie.de/service/faq-autostrom",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "AC ab 180, DC ab 60 min: 0,10 €/min, max. 12 €",
+   "note": "Preis je nach Betreiber-Kategorie (Niedrig/Standard/Hoch: AC 0,52/0,72/0,82, DC 0,62/0,72/0,82 €); Zuordnung der Betreiber zu Kategorien nicht belegt → unbekannt."
+  },
+  {
+   "tariffId": "maingau-autostrom-vorteil",
+   "cpo": "*",
+   "sourceUrl": "https://www.maingau-energie.de/service/faq-autostrom",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "AC ab 180, DC ab 60 min: 0,10 €/min, max. 12 €",
+   "note": "Preis je nach Betreiber-Kategorie (Niedrig/Standard/Hoch: AC 0,42/0,62/0,82, DC 0,52/0,62/0,82 €); Zuordnung der Betreiber zu Kategorien nicht belegt → unbekannt."
+  },
+  {
+   "tariffId": "ionity-direct",
+   "cpo": "ionity",
+   "dc": 0.72,
+   "sourceUrl": "https://www.ionity.eu/de/abonnements",
+   "checkedAt": "2026-10-13",
+   "acOffered": false,
+   "minimum": false,
+   "note": "Nur IONITY-Säulen (DC)."
+  },
+  {
+   "tariffId": "ionity-motion",
+   "cpo": "ionity",
+   "dc": 0.51,
+   "sourceUrl": "https://www.ionity.eu/de/abonnements",
+   "checkedAt": "2026-10-13",
+   "acOffered": false,
+   "minimum": true,
+   "note": "Nur IONITY-Säulen (DC)."
+  },
+  {
+   "tariffId": "ionity-power",
+   "cpo": "ionity",
+   "dc": 0.41,
+   "sourceUrl": "https://www.ionity.eu/de/abonnements",
+   "checkedAt": "2026-10-13",
+   "acOffered": false,
+   "minimum": true,
+   "note": "Nur IONITY-Säulen (DC)."
+  },
+  {
+   "tariffId": "adac-echarge",
+   "cpo": "aral",
+   "ac": 0.55,
+   "dc": 0.55,
+   "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/e-angebote/ladekarte/",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "keine",
+   "note": "An Aral pulse."
+  },
+  {
+   "tariffId": "adac-echarge",
+   "cpo": "*",
+   "ac": 0.75,
+   "dc": 0.75,
+   "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/e-angebote/ladekarte/",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "AC ab 120, DC ab 45 min: 0,15 €/min",
+   "note": "An fremden Säulen."
+  },
+  {
+   "tariffId": "aral-klassik",
+   "cpo": "aral",
+   "ac": 0.47,
+   "dc": 0.52,
+   "sourceUrl": "https://ladechef.de/tarife/aral-pulse/",
+   "checkedAt": "2026-10-13",
+   "minimum": true,
+   "blockingFee": "keine",
+   "note": "DC 0,52–0,62 €. Quelle: Vergleichsseite, nicht beim Anbieter verifiziert."
+  },
+  {
+   "tariffId": "aral-extra",
+   "cpo": "aral",
+   "ac": 0.41,
+   "dc": 0.46,
+   "sourceUrl": "https://ladechef.de/tarife/aral-pulse/",
+   "checkedAt": "2026-10-13",
+   "minimum": true,
+   "blockingFee": "keine",
+   "note": "DC 0,46–0,54 €. Quelle: Vergleichsseite, nicht beim Anbieter verifiziert."
+  },
+  {
+   "tariffId": "shell-basic",
+   "cpo": "shell",
+   "ac": 0.52,
+   "dc": 0.52,
+   "sourceUrl": "https://ladechef.de/tarife/shell-recharge/",
+   "checkedAt": "2026-10-13",
+   "minimum": true,
+   "blockingFee": "ab 60 min 0,15 €/min",
+   "note": "Quelle: Vergleichsseite, nicht beim Anbieter verifiziert."
+  },
+  {
+   "tariffId": "shell-basic",
+   "cpo": "*",
+   "ac": 0.54,
+   "dc": 0.74,
+   "sourceUrl": "https://ladechef.de/tarife/shell-recharge/",
+   "checkedAt": "2026-10-13",
+   "minimum": true,
+   "blockingFee": "ab 60 min 0,15 €/min",
+   "note": "Fremde Säulen, „ab“-Preis."
+  },
+  {
+   "tariffId": "shell-edeal",
+   "cpo": "shell",
+   "ac": 0.39,
+   "dc": 0.39,
+   "sourceUrl": "https://ladechef.de/tarife/shell-recharge/",
+   "checkedAt": "2026-10-13",
+   "minimum": true,
+   "blockingFee": "ab 60 min 0,15 €/min",
+   "note": "Quelle: Vergleichsseite, nicht beim Anbieter verifiziert."
+  },
+  {
+   "tariffId": "shell-edeal",
+   "cpo": "*",
+   "ac": 0.54,
+   "dc": 0.74,
+   "sourceUrl": "https://ladechef.de/tarife/shell-recharge/",
+   "checkedAt": "2026-10-13",
+   "minimum": true,
+   "blockingFee": "ab 60 min 0,15 €/min",
+   "note": "Fremde Säulen, „ab“-Preis."
+  },
+  {
+   "tariffId": "ewe-go",
+   "cpo": "ewe-go",
+   "ac": 0.52,
+   "dc": 0.52,
+   "sourceUrl": "https://www.ewe-go.de/",
+   "checkedAt": "2026-10-13",
+   "note": "Eigenes Netz. Partnerpreis 0,62 €, Partnerliste nicht belegt."
+  },
+  {
+   "tariffId": "swb-mobilstromkarte",
+   "cpo": "swb",
+   "ac": 0.47,
+   "dc": 0.57,
+   "sourceUrl": "https://www.swb.de/e-mobilitaet/mobilstromkarte",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "8–20 Uhr: AC ab 241., DC ab 121. min 0,10 €/min",
+   "note": "Preisblatt Stand 01.01.2025."
+  },
+  {
+   "tariffId": "swb-mobilstromkarte",
+   "cpo": "ewe-go",
+   "ac": 0.51,
+   "dc": 0.69,
+   "sourceUrl": "https://www.swb.de/e-mobilitaet/mobilstromkarte",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "8–20 Uhr: AC ab 241., DC ab 121. min 0,10 €/min",
+   "note": "Preisblatt Stand 01.01.2025."
+  },
+  {
+   "tariffId": "swb-mobilstromkarte",
+   "cpo": "ionity",
+   "dc": 0.99,
+   "sourceUrl": "https://www.swb.de/e-mobilitaet/mobilstromkarte",
+   "checkedAt": "2026-10-13",
+   "note": "Preisblatt Stand 01.01.2025."
+  },
+  {
+   "tariffId": "swb-mobilstromkarte",
+   "cpo": "*",
+   "ac": 0.59,
+   "dc": 0.69,
+   "sourceUrl": "https://www.swb.de/e-mobilitaet/mobilstromkarte",
+   "checkedAt": "2026-10-13",
+   "blockingFee": "8–20 Uhr: AC ab 241., DC ab 121. min 0,10 €/min",
+   "note": "Roaming. Preisblatt Stand 01.01.2025."
+  }
+ ]
+}
