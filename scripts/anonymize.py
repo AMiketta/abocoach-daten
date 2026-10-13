@@ -10,7 +10,7 @@ Heuristik (konservativ zugunsten des Datenschutzes, aber ohne Firmen zu verliere
    Branchen-/Markenwort (Haus, Burg, Edeka, Schreinerei …) → privat. Fängt seltene Vornamen ab.
 Alles andere bleibt (z. B. Marken wie „Solarcollect“, „TM Carports“, „Pension Engel“, „Haus Felsenburg“).
 """
-import re
+import hashlib, json, os, re, sys
 
 PRIVATE = "privat"
 
@@ -78,7 +78,7 @@ _WORD = re.compile(r"^[A-Za-zÄÖÜäöüßéèáàëïçñ.'-]+$")
 _SOLE = re.compile(r"(?i)\(?\s*,?\s*einzel(unternehmer(in)?|unternehmung|kaufmann|kauffrau)\s*\)?|^fa\.\s*")
 _BUSINESS_SUFFIX = ("büro", "technik", "service", "haus", "hof", "bau", "tik", "markt", "handel")
 
-def is_private_person(name: str) -> bool:
+def _heuristic(name: str) -> bool:
     n = " ".join(_SOLE.sub(" ", name or "").replace(",", " ").split())
     if not n or LEGAL.search(n):
         return False
@@ -101,5 +101,35 @@ def is_private_person(name: str) -> bool:
     return (len(words) in (2, 3) and all(_NAME.match(w) for w in words)
             and not any(w.lower() in BUSINESS_FIRST or w.lower().endswith(_BUSINESS_SUFFIX) for w in words))
 
+OVERRIDES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "anonymize_overrides.json")
+
+def normalize(name: str) -> str:
+    return " ".join((name or "").split()).casefold()
+
+def name_hash(name: str) -> str:
+    return "sha256:" + hashlib.sha256(normalize(name).encode("utf-8")).hexdigest()
+
+def load_overrides(path: str = OVERRIDES_PATH):
+    """(force_private, keep) als Mengen normalisierter Schlüssel. force_private: sha256-Hashes oder Klartext."""
+    if not os.path.exists(path):
+        return set(), set()
+    data = json.load(open(path, encoding="utf-8"))
+    force = {e if e.startswith("sha256:") else name_hash(e) for e in data.get("force_private", [])}
+    keep = {normalize(e) for e in data.get("keep", [])}
+    return force, keep
+
+_OVERRIDES = load_overrides()
+
+def is_private_person(name: str, overrides=None) -> bool:
+    force, keep = overrides if overrides is not None else _OVERRIDES
+    if name_hash(name) in force:
+        return True
+    if normalize(name) in keep:
+        return False
+    return _heuristic(name)
+
 def display_name(name: str) -> str:
     return PRIVATE if is_private_person(name) else name
+
+if __name__ == "__main__" and len(sys.argv) == 3 and sys.argv[1] == "--hash":
+    print(name_hash(sys.argv[2]))

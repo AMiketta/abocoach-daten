@@ -22,4 +22,11 @@ class T(unittest.TestCase):
     def test_invalid(self):
         self.assertEqual(build([issue(1, body=BODY.replace("DC", "XY"))], "x")["reports"], [])
 
+class Removal(unittest.TestCase):
+    def test_name_removal_never_parsed(self):
+        body = "### Betreibername wie in den Daten (operatorName)\n\nMax Muster\n"
+        self.assertEqual(build([issue(1, labels=("namensentfernung",), body=body),
+                                issue(2, labels=("preis-korrektur", "namensentfernung")),
+                                issue(3, body=body)], "x")["reports"], [])
+
 if __name__ == "__main__": unittest.main()

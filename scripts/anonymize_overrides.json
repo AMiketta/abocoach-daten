@@ -1,0 +1,8 @@
+{
+ "_hinweis": "Ausnahmen zur Heuristik in anonymize.py. force_private: Einträge immer „privat“, als sha256 des normalisierten Namens (Leerzeichen zusammengefasst, casefold), damit der Name hier nicht öffentlich steht. Erzeugen: python3 scripts/anonymize.py --hash \"Name\". keep: Firmen/Organisationen im Klartext, die die Heuristik fälschlich als Person erkennt. force_private hat Vorrang.",
+ "force_private": [
+  "sha256:b5fbb04c6a4cda829ff24f420379020f7879f8fdc4d99fb12ee910c369b9a3db",
+  "sha256:92fce94036cb3985cc001714358e897341a399c9b1184f6de13f7d04c9ab9483"
+ ],
+ "keep": []
+}
