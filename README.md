@@ -25,6 +25,22 @@ Regeln:
 - Status-Labels: `neu` → `in-pruefung` → `bestaetigt` / `abgelehnt` / `quelle-fehlt` / `duplikat` / `spam`, dazu `pr-offen`, `uebernommen`.
 - Bitte keine personenbezogenen Daten; Fotos können Standortdaten (EXIF) enthalten.
 
+## Entfernung/Korrektur von Betreibernamen
+
+Die Stationsdaten stammen aus dem **Ladesäulenregister der Bundesnetzagentur** (Lizenz CC BY 4.0). Dort sind auch
+Privatpersonen als Betreiber eingetragen. Wir ersetzen deren Namen beim Erzeugen durch **„privat“**
+(`scripts/anonymize.py`: Rechtsformen, Behörden und Firmenwörter bleiben, Namen im Muster „Vorname Nachname“ werden ersetzt).
+Standort und Leistung bleiben, weil sie für die Säulensuche nötig sind. Eine Heuristik macht Fehler; Ausnahmen stehen in
+`scripts/anonymize_overrides.json` (`force_private` als sha256-Hash, damit der Name dort nicht im Klartext steht; `keep` für Firmen).
+
+**Entfernung oder Korrektur beantragen:**
+- per **Mail** an **`<DATENSCHUTZ-MAILADRESSE FOLGT>`** (empfohlen, nicht öffentlich), oder
+- per [GitHub-Issue „Entfernung/Korrektur eines Betreibernamens“](https://github.com/AMiketta/abocoach-daten/issues/new?template=namensentfernung.yml).
+  Issues sind öffentlich; nötig ist nur der Betreibername, wie er in den Daten steht.
+
+Die Änderung wirkt mit der nächsten Veröffentlichung auf Pages und dem nächsten App-Update. Den Eintrag im Register selbst
+ändert nur der Betreiber bei der Bundesnetzagentur.
+
 ## Lizenzen und Quellen
 
 - **Stationsdaten:** Datenquelle: Bundesnetzagentur, Ladesäulenregister

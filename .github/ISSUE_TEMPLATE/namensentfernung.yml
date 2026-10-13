@@ -1,0 +1,24 @@
+name: Entfernung/Korrektur eines Betreibernamens
+description: Dein Name steht in den Stationsdaten und soll entfernt oder korrigiert werden
+title: "Namensentfernung"
+labels: ["namensentfernung"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Achtung: Issues sind öffentlich.** Wenn dein Name hier nicht öffentlich stehen soll, schreib lieber eine Mail (siehe README).
+        Wir brauchen nur den Betreibernamen, wie er in den Daten steht. Keine Adresse, Telefonnummer oder Standort angeben.
+        Die Daten stammen aus dem Ladesäulenregister der Bundesnetzagentur; dort kannst du den Eintrag ebenfalls ändern lassen.
+  - type: input
+    id: operatorName
+    attributes: {label: "Betreibername wie in den Daten (operatorName)"}
+    validations: {required: true}
+  - type: dropdown
+    id: request
+    attributes:
+      label: "Anliegen (request)"
+      options: ["Durch „privat“ ersetzen", "Firma fälschlich als „privat“ – Namen wieder anzeigen", "Sonstiges"]
+    validations: {required: false}
+  - type: textarea
+    id: comment
+    attributes: {label: "Hinweis (optional, ohne personenbezogene Daten)"}

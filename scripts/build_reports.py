@@ -6,7 +6,7 @@ Aufruf: build_reports.py <issues.json (gh api …/issues)> <out reports.json>
 """
 import json, re, sys, datetime
 
-SKIP = {"spam", "duplikat", "abgelehnt", "uebernommen"}
+SKIP = {"spam", "duplikat", "abgelehnt", "uebernommen", "namensentfernung"}
 NUM_FIELDS = {"reportedValue", "appValue"}
 
 def parse_body(body):
@@ -33,6 +33,8 @@ def build(issues, now):
         if "pull_request" in it or it.get("state") != "open": continue
         labels = {l["name"] for l in it.get("labels", [])}
         if "preis-korrektur" not in labels or labels & SKIP: continue
+        # Nur Issues aus dem Preis-Formular (andere Formulare, z. B. namensentfernung.yml, nie als Preis werten)
+        if "(tariffId)" not in (it.get("body") or ""): continue
         f = parse_body(it.get("body"))
         tid, cpo = f.get("tariffId", "").strip(), f.get("cpo", "").strip() or "*"
         ct = f.get("chargeType", "").strip().upper()
