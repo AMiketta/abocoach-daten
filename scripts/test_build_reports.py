@@ -22,6 +22,17 @@ class T(unittest.TestCase):
     def test_invalid(self):
         self.assertEqual(build([issue(1, body=BODY.replace("DC", "XY"))], "x")["reports"], [])
 
+class Resolved(unittest.TestCase):
+    def closed(self, n, labels, closed="2026-10-12T00:00:00Z"):
+        i = issue(n, labels=labels); i["state"] = "closed"; i["closed_at"] = closed; return i
+    def test_resolved(self):
+        d = build([self.closed(5, ("preis-korrektur", "uebernommen")), self.closed(6, ("preis-korrektur", "abgelehnt")),
+                   self.closed(7, ("preis-korrektur", "duplikat")), self.closed(8, ("preis-korrektur", "uebernommen"), "2025-01-01T00:00:00Z"),
+                   issue(9)], "2026-10-13T00:00:00Z")
+        self.assertEqual(d["resolved"], [{"reportId": "r-7f3c9a", "issue": 5, "status": "uebernommen", "closedAt": "2026-10-12"},
+                                         {"reportId": "r-7f3c9a", "issue": 6, "status": "abgelehnt", "closedAt": "2026-10-12"}])
+        self.assertEqual(d["reports"][0]["issues"], [9], "offene Meldungen weiter in reports")
+
 class Removal(unittest.TestCase):
     def test_name_removal_never_parsed(self):
         body = "### Betreibername wie in den Daten (operatorName)\n\nMax Muster\n"

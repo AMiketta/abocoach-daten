@@ -9,7 +9,7 @@ kompakte Stationsdaten. Der App-Code liegt in einem privaten Repo.
 |---|---|---|
 | `tariffs.json` | Ladetarife (Grundgebühr, AC/DC €/kWh) | `data/tariffs.json`, je Eintrag mit `sourceUrl` und Prüfdatum |
 | `network-prices.json` | Preis je Karte × Betreiber | `data/network-prices.json`, je Eintrag mit `sourceUrl` und `checkedAt` |
-| `reports.json` | Offene Preis-Meldungen, aggregiert (`abocoach.reports/1`) | Issues mit Label `preis-korrektur`, erzeugt von `scripts/build_reports.py` |
+| `reports.json` | Offene Preis-Meldungen, aggregiert, plus `resolved` (übernommen/abgelehnt der letzten 180 Tage, nur Meldungs-ID) (`abocoach.reports/1`) | Issues mit Label `preis-korrektur`, erzeugt von `scripts/build_reports.py` |
 | `stations.txt`, `evse-prefix.json` | Standorte und Betreiber öffentlicher Ladepunkte | BNetzA-Ladesäulenregister, erzeugt von `scripts/build_stations.py` |
 
 ## Preis melden (Wiki-Modus)
