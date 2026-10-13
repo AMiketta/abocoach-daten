@@ -1,9 +1,10 @@
 """Ersetzt Betreibernamen, die nach Privatpersonen aussehen, durch „privat“.
 
 Heuristik (konservativ zugunsten des Datenschutzes, aber ohne Firmen zu verlieren):
-1. Enthält der Name eine Rechtsform oder ein Firmen-/Behördenwort (GmbH, AG, KG, e.V., Stadtwerke, Hotel …) → bleibt.
+1. Enthält der Name eine Rechtsform oder einen öffentlichen Träger (GmbH, AG, KG, e.V., Stadtwerke, Gemeinde …) → bleibt.
 2. „Familie …“, „Herr/Frau …“ → privat.
-3. 2–5 Wörter, nur Buchstaben/Bindestrich/Punkt, erstes Wort (ohne Titel wie „Dr.“) ist ein bekannter Vorname → privat.
+3. 2–5 Wörter, nur Buchstaben/Bindestrich/Punkt, erstes Wort (ohne Titel wie „Dr.“) ist ein bekannter Vorname → privat,
+   außer ein weiteres Wort ist ein Firmenwort („Bernhard Schneider Vermietungen“). Der Nachname allein zählt nie als Firmenwort.
    Zusätze wie „(Einzelunternehmer)“, „, Einzelunternehmer“ oder „Fa.“ werden vorher entfernt (Einzelunternehmen = Person).
 4. Zwei oder drei Wörter im Muster „Vorname Nachname“ (je Großbuchstabe + Kleinbuchstaben), erstes Wort kein
    Branchen-/Markenwort (Haus, Burg, Edeka, Schreinerei …) → privat. Fängt seltene Vornamen ab.
@@ -13,18 +14,27 @@ import re
 
 PRIVATE = "privat"
 
-COMPANY = re.compile(r"""(?ix)(
- \bgmbh\b|\bmbh\b|\bag\b|\bkg\b|\bkgaa\b|\bohg\b|\bgbr\b|\bug\b|\bse\b|\beg\b|\be\.?\s?g\.?(?=\s|$)|\be\.?\s?v\.?(?=\s|$)|\be\.?\s?k\.?(?=\s|$)|
- \bltd\b|\binc\b|\bllc\b|\bb\.?v\.?(?=\s|$)|\bs\.?a\.?r?\.?l?\.?(?=\s|$)|\bco\.|&|\+|\bpartg|\bstiftung|\bverein|\bgenossenschaft|
- stadtwerk|werke\b|gemeinde|\bstadt\b|landkreis|kreis|verband|\bamt\b|verwaltung|ministerium|universit|hochschule|schule|kirche|pfarr|
- klinik|krankenhaus|\bbank\b|sparkasse|volksbank|raiffeisen|versicherung|holding|gruppe|group|
- energie|energy|strom|solar|power|elektro|elektrik|electric|mobil|charg|lade|tankstelle|\btank|
- auto|kfz|garage|werkstatt|fahrzeug|motor|car\b|cars\b|
- hotel|pension|gasthof|gasthaus|landgasthof|restaurant|ferien|camping|brauerei|bäckerei|metzgerei|weingut|winzer|hof\b|
- markt|handel|service|technik|bau\b|immobilien|vermiet|verwaltung|consult|logistik|transport|spedition|praxis|kanzlei|apotheke|
- zentrum|center|park\b|parkhaus|\binstitut|\bclub\b|sport|\bwerk\b|gesellschaft|betrieb|unternehmen|agentur|studio|shop|
- \bgbr\b|\bi\.?\s?g\.?(?=\s|$)|international|deutschland|germany|europe
+# Rechtsformen und öffentliche Träger: immer Firma/Organisation.
+LEGAL = re.compile(r"""(?ix)(
+ \bgmbh\b|\bggmbh\b|\bmbh\b|\bag\b|\bkg\b|\bkgaa\b|\bohg\b|\bgbr\b|\begbr\b|\bug\b|\bse\b|\beg\b|\be\.\s?g\.|\be\.\s?v\.?|\bev\b|\be\.\s?k(fm|fr)?\.?|
+ \bltd\b|\binc\b|\bllc\b|\bb\.v\.|\bs\.a\.|\bsarl\b|\bco\.|&|\+|\bpartg|\bstiftung|\bverein|\bgenossenschaft|\bi\.\s?g\.|
+ stadtwerk|\bwerke\b|gemeinde|\bstadt\b|landkreis|\bkreis\b|verband|\bamt\b|verwaltung|ministerium|universit|hochschule|kirche|pfarr
 )""")
+
+# Firmen-/Branchenwörter (auch als Wortteil). Bei „Vorname Nachname“ nicht auf den Nachnamen angewendet,
+# sonst würden Nachnamen wie Stromberg, Althof oder Sportelli fälschlich als Firma gelten.
+WEAK = re.compile(r"""(?ix)(
+ schule|klinik|krankenhaus|\bbank\b|sparkasse|volksbank|raiffeisen|versicherung|holding|gruppe|group|
+ energie|energy|strom|solar|power|elektro|elektrik|electric|mobil|charg|lade|tankstelle|\btank|
+ auto|kfz|garage|werkstatt|fahrzeug|motor|\bcars?\b|
+ hotel|pension|gasthof|gasthaus|restaurant|ferien|camping|brauerei|bäckerei|metzgerei|weingut|winzer|hof\b|
+ markt|handel|service|technik|technolog|\bbau\b|immobilien|vermiet|consult|logistik|transport|spedition|praxis|kanzlei|apotheke|
+ zentrum|center|park\b|parkhaus|\binstitut|\bclub\b|sport|\bwerk\b|gesellschaft|betrieb|unternehmen|agentur|studio|shop|
+ landwirtschaft|international|deutschland|germany|europe
+)""")
+
+# Kompatibilität: alles, was auf eine Firma hindeutet
+COMPANY = re.compile(LEGAL.pattern.replace("(?ix)", "") + "|" + WEAK.pattern.replace("(?ix)", ""), re.IGNORECASE | re.VERBOSE)
 
 TITLES = {"dr", "dr.", "prof", "prof.", "dipl.-ing.", "dipl.", "ing.", "von", "van", "de", "der"}
 
@@ -70,7 +80,7 @@ _BUSINESS_SUFFIX = ("büro", "technik", "service", "haus", "hof", "bau", "tik", 
 
 def is_private_person(name: str) -> bool:
     n = " ".join(_SOLE.sub(" ", name or "").replace(",", " ").split())
-    if not n or COMPANY.search(n):
+    if not n or LEGAL.search(n):
         return False
     low = n.lower()
     if re.match(r"^(familie|fam\.|herr|frau|eheleute)\b", low):
@@ -83,7 +93,11 @@ def is_private_person(name: str) -> bool:
         return False
     first = rest[0].lower()
     if first in FIRST_NAMES or first.split("-")[0] in FIRST_NAMES:
-        return True
+        # „Vorname Nachname“ ist immer eine Person; bei weiteren Wörtern (außer Titeln) deutet ein Firmenwort auf ein Geschäft hin
+        extra = rest[1:-1] + ([rest[-1]] if len(rest) > 2 else [])
+        return not any(WEAK.search(w) or w.lower() in BUSINESS_FIRST for w in extra)
+    if WEAK.search(n):
+        return False
     return (len(words) in (2, 3) and all(_NAME.match(w) for w in words)
             and not any(w.lower() in BUSINESS_FIRST or w.lower().endswith(_BUSINESS_SUFFIX) for w in words))
 
