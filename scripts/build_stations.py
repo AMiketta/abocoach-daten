@@ -12,6 +12,8 @@ Position (5 Nachkommastellen) und gleichem Betreiber werden zu einer Station zus
 Aufruf: build_stations.py <register.csv> <aliases.json> <out-dir>
 """
 import csv, collections, gzip, io, json, re, sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from anonymize import is_private_person, PRIVATE
 
 def norm_prefix(evse):
     e = re.sub(r"[^A-Za-z0-9]", "", evse or "").upper()
@@ -34,6 +36,7 @@ def main(src, aliases_path, out):
     reader = csv.DictReader(io.StringIO("\n".join(lines[start:])), delimiter=";")
     ops, op_idx = [], {}
     stations = {}
+    anonymized = set()
     prefix_ops = collections.defaultdict(collections.Counter)
     for row in reader:
         if (row.get("Status") or "").strip() not in ("In Betrieb", ""): continue
@@ -47,7 +50,9 @@ def main(src, aliases_path, out):
         key, disp = "", name
         for rx, a in compiled:
             if rx.search(name): key, disp = a["key"], a["name"]; break
-        ident = key or name
+        if not key and is_private_person(name):
+            disp = PRIVATE; anonymized.add(name)
+        ident = key or disp
         if ident not in op_idx:
             op_idx[ident] = len(ops); ops.append((key, disp))
         oi = op_idx[ident]
@@ -79,7 +84,7 @@ def main(src, aliases_path, out):
         prefixes[p] = {"key": k, "name": d, "ambiguous": len(cnt) > 1}
     json.dump({"dataAsOf": as_of, "attribution": "Bundesnetzagentur.de", "license": "CC BY 4.0", "prefixes": prefixes},
               open(os.path.join(out, "evse-prefix.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-    print(f"{len(rows)} Stationen, {len(ops)} Betreiber, {len(prefixes)} EVSE-Präfixe, Stand {as_of}")
+    print(f"{len(rows)} Stationen, {len(ops)} Betreiber ({len(anonymized)} Privatpersonen → privat), {len(prefixes)} EVSE-Präfixe, Stand {as_of}")
 
 if __name__ == "__main__":
     main(*sys.argv[1:4])

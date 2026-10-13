@@ -31,7 +31,9 @@ Regeln:
   ([bundesnetzagentur.de](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/E-Mobilitaet/start.html)),
   Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de). Die Daten wurden verändert: gefiltert
   (nur „In Betrieb“), je Standort und Betreiber zusammengefasst, Koordinaten auf 5 Nachkommastellen gerundet und kodiert,
-  Betreibernamen teils auf Marken abgebildet (`data/operator-aliases.json`). Der Stand steht in der Kopfzeile von `stations.txt`.
+  Betreibernamen teils auf Marken abgebildet (`data/operator-aliases.json`) und **Namen von Privatpersonen durch „privat“ ersetzt**
+  (Heuristik in `scripts/anonymize.py`: Rechtsformen, Behörden und Firmenwörter bleiben, Namen im Muster Vorname Nachname werden ersetzt;
+  Standort und Leistung bleiben erhalten). Der Stand steht in der Kopfzeile von `stations.txt`.
   Die Stationsdateien werden nur auf Pages veröffentlicht, nicht im Git-Verlauf gespeichert.
 - **Preise:** eigene Recherche aus öffentlichen Anbieterquellen (je Eintrag `sourceUrl`), ohne Gewähr. Maßgeblich ist der
   Preis an der Säule bzw. beim Anbieter. Lizenz für die Preisdateien und Skripte: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de), © AMiketta.
