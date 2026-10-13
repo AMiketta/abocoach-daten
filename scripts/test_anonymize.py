@@ -10,7 +10,7 @@ KEEP = ["EnBW mobility+ AG", "Stadtwerke Bremen", "swb Vertrieb Bremen GmbH", "T
         "Tennisverein Grün-Weiß e.V.", "Gemeinde Musterdorf", "Pension Engel", "Landgasthof Krone", "Solarcollect", "TM Carports",
         "VINOTHEUM", "Haus Felsenburg", "Edeka Klein", "Schreinerei Berger", "Photovoltaik Holstein", "Gaststätte Reinermann",
         "Färber Ingenieurbüro", "Horse Lake Ranch", "Christian Müller GmbH", "Thomas Bauer e.K.", "Bernhard Schneider Vermietungen",
-        "Autohaus Meyer", "Hotel Adler", "Union Investment Real", "IONITY GmbH", "Diako Nordfriesland gGmbH", "Gerd Krumland Landwirtschaft", "Kreis Herford", ""]
+        "Autohaus Meyer", "Hotel Adler", "Union Investment Real", "IONITY GmbH", "Diako Nordfriesland gGmbH", "Gerd Krumland Landwirtschaft", "Kreis Herford", "Max-Planck-Institut f. Multidisziplinäre Naturwissenschaften", "Mark-E Aktiengesellschaft", ""]
 
 class T(unittest.TestCase):
     def test_persons(self):

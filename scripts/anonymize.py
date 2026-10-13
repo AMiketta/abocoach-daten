@@ -18,7 +18,7 @@ PRIVATE = "privat"
 LEGAL = re.compile(r"""(?ix)(
  \bgmbh\b|\bggmbh\b|\bmbh\b|\bag\b|\bkg\b|\bkgaa\b|\bohg\b|\bgbr\b|\begbr\b|\bug\b|\bse\b|\beg\b|\be\.\s?g\.|\be\.\s?v\.?|\bev\b|\be\.\s?k(fm|fr)?\.?|
  \bltd\b|\binc\b|\bllc\b|\bb\.v\.|\bs\.a\.|\bsarl\b|\bco\.|&|\+|\bpartg|\bstiftung|\bverein|\bgenossenschaft|\bi\.\s?g\.|
- stadtwerk|\bwerke\b|gemeinde|\bstadt\b|landkreis|\bkreis\b|verband|\bamt\b|verwaltung|ministerium|universit|hochschule|kirche|pfarr
+ stadtwerk|aktiengesellschaft|institut|wissenschaft|\bwerke\b|gemeinde|\bstadt\b|landkreis|\bkreis\b|verband|\bamt\b|verwaltung|ministerium|universit|hochschule|kirche|pfarr
 )""")
 
 # Firmen-/Branchenwörter (auch als Wortteil). Bei „Vorname Nachname“ nicht auf den Nachnamen angewendet,
