@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Abo-Coach – Datenschutzerklärung</title>
+<style>body{font-family:system-ui,sans-serif;max-width:46rem;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#1b1b1b}table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:.3rem .5rem}</style>
+</head><body>
+<!-- ENTWURF: enthält Platzhalter in [ECKIGEN KLAMMERN]. Erst nach dem Ausfüllen nach site/ kopieren und noindex entfernen. -->
+<h1>Datenschutzerklärung für die App „Abo-Coach“</h1>
+<p><strong>Stand: [DATUM]</strong></p>
+<blockquote>
+<p><strong>Hinweis zur Vorlage:</strong> Diese Vorlage beschreibt, was die App laut Quellcode (Stand 14.10.2026) tatsächlich verarbeitet. Sie ist <strong>keine Rechtsberatung</strong>. Bitte vor der Veröffentlichung prüfen lassen und alle Angaben in eckigen Klammern ersetzen. Ändert sich die App (z. B. echte Bezahlung für Plus, Analyse- oder Absturzdienste), muss diese Erklärung angepasst werden.</p>
+</blockquote>
+<h2>1. Verantwortlicher</h2>
+<p>[NAME]<br />
+[ANSCHRIFT]<br />
+E-Mail: [E-MAIL]</p>
+<p>Ein Datenschutzbeauftragter ist nicht benannt. [Falls doch: DATENSCHUTZBEAUFTRAGTER, KONTAKT]</p>
+<h2>2. Das Wichtigste in Kürze</h2>
+<ul>
+<li>Abo-Coach funktioniert <strong>ohne Konto, ohne Login und ohne eigenen Server</strong>.</li>
+<li>Deine Eingaben (Ladeprofil, Karten, Monatswerte, Vertragsende) bleiben <strong>auf deinem Gerät</strong>.</li>
+<li>Die App lädt <strong>öffentliche Datendateien</strong> (Tarife, Preise, Ladestationen, gemeldete Preise) von <strong>GitHub Pages</strong>. Dabei sieht GitHub deine IP-Adresse.</li>
+<li>Der <strong>Standort</strong> wird nur abgefragt, wenn du „An Säule prüfen“ antippst, und <strong>verlässt das Gerät nicht</strong>.</li>
+<li>Die App enthält <strong>keine Werbung, keine Analyse- oder Tracking-Dienste und kein Crash-Reporting</strong>.</li>
+<li>Preisfehler kannst du freiwillig melden, entweder als <strong>öffentliches GitHub-Issue</strong> oder <strong>per E-Mail</strong>.</li>
+</ul>
+<h2>3. Daten, die nur auf deinem Gerät gespeichert werden</h2>
+<p>Die App speichert lokal im App-Speicher (Android: SharedPreferences und Cache-Verzeichnis, iOS: UserDefaults und Library/Caches):</p>
+<ul>
+<li><strong>Ladeprofil:</strong> geschätzte kWh pro Monat und Anteil Schnellladen</li>
+<li><strong>Deine Karten/Tarife</strong> und dein Hauptabo</li>
+<li><strong>Monatsverlauf:</strong> geladene kWh und Schnellladeanteil je Monat, Herkunft „manuell“ oder „CSV“, auch Ladungen aus „Hier geladen“</li>
+<li><strong>Vertragsende</strong> und ob die Kündigungserinnerung aktiv ist</li>
+<li><strong>Einstellungen:</strong> Darstellung (hell/dunkel), Plus-Schalter</li>
+<li><strong>Eigene Preismeldungen:</strong> Meldungs-ID, Tarif, Betreiber, Ladeart, Weg (GitHub oder E-Mail), Datum (höchstens 50)</li>
+<li><strong>Zwischengespeicherte öffentliche Datendateien</strong> und technische Abrufdaten (Zeitpunkt des letzten Abrufs, ETag)</li>
+</ul>
+<p>Diese Daten werden von uns <strong>nicht</strong> übertragen oder eingesehen. Du kannst den Verlauf in den Einstellungen löschen. Alles andere entfernst du durch das Löschen der App-Daten bzw. das Deinstallieren der App.</p>
+<p><strong>Gerätebackup:</strong> Unter Android ist die Sicherung der App-Daten durch das Betriebssystem erlaubt (<code>allowBackup</code>). Wenn du die Datensicherung deines Geräts nutzt (z. B. Google-Backup bzw. iCloud-Backup unter iOS), können diese Daten in deinem Backup beim jeweiligen Anbieter landen. Das richtet sich nach deinen Geräteeinstellungen und den Bedingungen dieses Anbieters.</p>
+<p><strong>Rechtsgrundlage:</strong> Die Speicherung erfolgt nur auf deinem Gerät, um die von dir gewünschten Funktionen bereitzustellen (Art. 6 Abs. 1 lit. b DSGVO bzw. § 25 Abs. 2 Nr. 2 TDDDG für den Zugriff auf den Gerätespeicher).</p>
+<h2>4. Abruf der Datendateien von GitHub Pages</h2>
+<p>Die App lädt höchstens einmal am Tag folgende öffentliche Dateien von <code>https://amiketta.github.io/abocoach-daten/</code>:
+<code>tariffs.json</code>, <code>network-prices.json</code>, <code>stations.txt</code>, <code>evse-prefix.json</code>, <code>reports.json</code>.</p>
+<p>Dabei werden <strong>keine Daten aus deinen Eingaben</strong> mitgesendet. Technisch bedingt erhält der Betreiber des Servers, <strong>GitHub, Inc.</strong> (88 Colin P Kelly Jr St, San Francisco, CA 94107, USA), deine <strong>IP-Adresse</strong>, Datum und Uhrzeit, die abgerufene Datei und technische Angaben der Anfrage (z. B. User-Agent, ETag). GitHub kann diese Daten in Server-Logs speichern, z. B. zur Sicherheit und Missbrauchsabwehr. Wir haben auf diese Logs keinen Zugriff.</p>
+<ul>
+<li><strong>Rechtsgrundlage:</strong> berechtigtes Interesse an aktuellen Tarif- und Stationsdaten ohne eigenen Server (Art. 6 Abs. 1 lit. f DSGVO).</li>
+<li><strong>Übermittlung in die USA:</strong> GitHub ist ein US-Unternehmen. [PRÜFEN: ob GitHub unter dem EU-US Data Privacy Framework zertifiziert ist bzw. welche Garantien (Standardvertragsklauseln) gelten.] Datenschutzhinweise von GitHub: https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement</li>
+<li>Ohne Internetverbindung nutzt die App die zuletzt geladenen bzw. mitgelieferten Dateien.</li>
+</ul>
+<h2>5. Standort beim Säulen-Check</h2>
+<p>Nur wenn du „An Säule prüfen“ und dann „Standort verwenden“ antippst, fragt die App <strong>einmalig</strong> deinen Standort ab, nachdem du die Berechtigung erteilt hast (genau oder ungefähr). Es gibt <strong>keine Standortabfrage im Hintergrund</strong>.</p>
+<p>Der Standort wird <strong>nur auf dem Gerät</strong> mit der mitgelieferten Stationsliste abgeglichen, um den Betreiber der nächsten Ladesäule zu finden. Er wird <strong>nicht gespeichert und nicht an uns übertragen</strong>.</p>
+<p>Hinweis: Für die Ortung nutzt die App die Ortungsdienste deines Betriebssystems (Android: GPS oder Netzwerk-Ortung, iOS: Core Location). Je nach Geräteeinstellungen verarbeiten dabei Google bzw. Apple eigene Daten (z. B. für WLAN- oder Mobilfunk-Ortung). Darauf haben wir keinen Einfluss.</p>
+<p>Alternativ kannst du die Säule ohne Standort über die EVSE-ID oder die Betreibersuche bestimmen.</p>
+<p><strong>Rechtsgrundlage:</strong> deine Einwilligung durch die Erteilung der Berechtigung (Art. 6 Abs. 1 lit. a DSGVO). Du kannst sie jederzeit in den Systemeinstellungen widerrufen.</p>
+<h2>6. CSV-Import</h2>
+<p>Wenn du eine CSV-Datei mit deinen Ladevorgängen importierst, wählst du sie selbst über die Dateiauswahl des Systems aus. Die Datei wird <strong>nur auf dem Gerät</strong> gelesen. Gespeichert werden nur die daraus berechneten <strong>Monatswerte</strong> (kWh, Schnellladeanteil), nicht die Datei selbst. Es wird nichts übertragen.</p>
+<p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (gewünschte Funktion).</p>
+<h2>7. Preise melden („Preis korrigieren“)</h2>
+<p>Das Melden falscher Preise ist freiwillig. Die App erzeugt eine Meldung mit folgenden <strong>Fachangaben</strong>: Tarif, Betreiber, Ladeart, betroffenes Feld, angezeigter Wert, Datum, Datenstand der App, App-Version und eine <strong>zufällige Meldungs-ID</strong>. Den richtigen Wert, eine Quelle und einen Kommentar ergänzt du selbst. Koordinaten werden <strong>nie</strong> übertragen.</p>
+<p><strong>a) Über GitHub:</strong> Die App öffnet im Browser ein vorausgefülltes Formular im <strong>öffentlichen</strong> Repository <code>AMiketta/abocoach-daten</code> auf GitHub. Abgeschickt wird erst, wenn du selbst auf „Submit“ tippst. Dafür brauchst du ein <strong>GitHub-Konto</strong>. Die Meldung ist <strong>öffentlich sichtbar</strong>, zusammen mit deinem <strong>GitHub-Benutzernamen</strong> und ggf. hochgeladenen Bildern. Bilder können Standortdaten (EXIF) enthalten, lade daher lieber Screenshots hoch. Für die Nutzung von GitHub gelten die Bedingungen und Datenschutzhinweise von GitHub (USA, siehe Abschnitt 4).</p>
+<p><strong>b) Per E-Mail:</strong> Die App öffnet dein E-Mail-Programm mit einem vorausgefüllten Text an [E-MAIL-FÜR-MELDUNGEN]. Wir erhalten dann deine <strong>E-Mail-Adresse</strong>, ggf. deinen Namen und den Inhalt der Nachricht. Zur Prüfung übernehmen wir nur die Fachangaben (ohne Absender) in ein öffentliches GitHub-Issue. Die E-Mail löschen wir nach [LÖSCHFRIST, z. B. 3 Monate] nach Abschluss der Prüfung. Bei der Übertragung ist außerdem dein E-Mail-Anbieter beteiligt.</p>
+<p><strong>Meldungs-ID und Status:</strong> Die Meldungs-ID ist eine Zufallszahl (z. B. <code>r-7f3c9a</code>), die nicht mit deinem Gerät oder deiner Person verknüpft ist. Sie steht in der Meldung und wird lokal gespeichert. Die öffentliche Datei <code>reports.json</code> enthält zusammengefasste offene Meldungen (Tarif, Betreiber, Ladeart, gemeldeter Wert, Anzahl, Datum, Issue-Nummern, Meldungs-IDs) sowie erledigte Meldungen der letzten 180 Tage (Meldungs-ID, Issue-Nummer, Ergebnis). So kann die App dir den Status deiner Meldung anzeigen, ohne dass ein Konto nötig ist. Wer deine Meldungs-ID kennt, kann sie dem öffentlichen Issue zuordnen.</p>
+<p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an korrekten Preisdaten) bzw. lit. b, soweit du die Prüfung deiner Meldung anfragst.</p>
+<h2>8. Kündigungserinnerung (Benachrichtigung)</h2>
+<p>Wenn du in Plus ein Vertragsende einträgst und die Erinnerung einschaltest, plant die App eine <strong>lokale Benachrichtigung</strong> 7 Tage vor Ablauf der Kündigungsfrist. Dafür fragt die App ggf. die Berechtigung für Mitteilungen an. Es gibt <strong>keinen Push-Server</strong>. Die Erinnerung wird nur auf dem Gerät geplant.</p>
+<p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Erteilung der Berechtigung) bzw. lit. b DSGVO (gewünschte Funktion).</p>
+<h2>9. Plus</h2>
+<p>„Plus“ ist derzeit nur ein Schalter in der App. <strong>Es findet keine Bezahlung statt</strong>, und es werden keine Zahlungsdaten verarbeitet. [FALLS SPÄTER IN-APP-KÄUFE ÜBER GOOGLE PLAY / APP STORE EINGEFÜHRT WERDEN: ABSCHNITT ERGÄNZEN.]</p>
+<h2>10. Keine Analyse, keine Werbung, kein Crash-Reporting</h2>
+<p>Die App enthält <strong>keine</strong> Analyse-, Tracking-, Werbe- oder Absturzberichts-Dienste und keine Werbe-ID. Bei Abstürzen können dir die App-Stores bzw. das Betriebssystem eigene Absturzberichte anbieten (z. B. Google Play Console, Apple). Diese richten sich nach deinen Geräteeinstellungen.</p>
+<h2>11. App-Stores</h2>
+<p>Für Download und Updates gelten die Datenschutzhinweise von Google (Google Play) bzw. Apple (App Store). [STORE-LINKS ERGÄNZEN, SOBALD VERÖFFENTLICHT]</p>
+<h2>12. Links zu Anbietern</h2>
+<p>„Zum Anbieter“ und Quellenangaben öffnen Webseiten der Ladeanbieter in deinem Browser. Dort gelten deren Datenschutzhinweise.</p>
+<h2>13. Deine Rechte</h2>
+<p>Du hast das Recht auf
+- Auskunft (Art. 15 DSGVO),
+- Berichtigung (Art. 16 DSGVO),
+- Löschung (Art. 17 DSGVO),
+- Einschränkung der Verarbeitung (Art. 18 DSGVO),
+- Datenübertragbarkeit (Art. 20 DSGVO),
+- <strong>Widerspruch</strong> gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art. 21 DSGVO),
+- Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO), z. B. in den Systemeinstellungen.</p>
+<p>Da die meisten Daten nur auf deinem Gerät liegen, kannst du sie dort selbst einsehen und löschen. Für Meldungen per E-Mail oder für Fragen wende dich an [E-MAIL].</p>
+<p><strong>Beschwerderecht:</strong> Du kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. bei der für uns zuständigen:
+[AUFSICHTSBEHÖRDE, z. B. Die Landesbeauftragte für Datenschutz und Informationsfreiheit der Freien Hansestadt Bremen, Arndtstraße 1, 27570 Bremerhaven, office@datenschutz.bremen.de – BITTE PRÜFEN]</p>
+<h2>14. Betreibernamen in den Stationsdaten</h2>
+<p>Die Stationsdaten stammen aus dem Ladesäulenregister der Bundesnetzagentur (Lizenz CC BY 4.0). Namen von Privatpersonen, die dort als Betreiber eingetragen sind, ersetzen wir durch „privat“. Wenn dein Name trotzdem angezeigt wird oder falsch zugeordnet ist, kannst du die Entfernung per E-Mail an [E-MAIL-DATENSCHUTZ] oder über das Formular „Entfernung/Korrektur eines Betreibernamens“ im Repository <code>AMiketta/abocoach-daten</code> beantragen (öffentlich).</p>
+<p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (Bereitstellung der Säulensuche auf Basis öffentlicher Registerdaten).</p>
+<h2>15. Änderungen</h2>
+<p>Wir passen diese Erklärung an, wenn sich die App ändert. Es gilt die jeweils in der App bzw. unter [URL-DATENSCHUTZERKLÄRUNG] veröffentlichte Fassung.</p>
+</body></html>
