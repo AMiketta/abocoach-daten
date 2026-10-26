@@ -72,8 +72,8 @@ jobs:
       - name: Startseite
         run: |
           cat > site/index.html <<'HTML'
-          <!doctype html><meta charset="utf-8"><title>Abo-Coach Daten</title>
-          <h1>Abo-Coach Daten</h1>
+          <!doctype html><meta charset="utf-8"><title>Volteule Daten</title>
+          <h1>Volteule Daten</h1>
           <ul><li><a href="tariffs.json">tariffs.json</a></li><li><a href="network-prices.json">network-prices.json</a></li>
           <li><a href="reports.json">reports.json</a></li><li><a href="stations.txt">stations.txt</a></li><li><a href="evse-prefix.json">evse-prefix.json</a></li></ul>
           <p>Stationsdaten: Bundesnetzagentur.de, Ladesäulenregister, Lizenz CC BY 4.0 (verarbeitet: gefiltert, zusammengefasst, kodiert).
