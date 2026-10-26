@@ -1,6 +1,6 @@
 # abocoach-daten
 
-Öffentliche Daten für die App **Abo-Coach**: Ladetarife, Preistabelle „Karte × Betreiber“, Nutzer-Meldungen und
+Öffentliche Daten für die App **Volteule** (Arbeitstitel: Abo-Coach): Ladetarife, Preistabelle „Karte × Betreiber“, Nutzer-Meldungen und
 kompakte Stationsdaten. Der App-Code liegt in einem privaten Repo.
 
 **Veröffentlicht unter:** https://amiketta.github.io/abocoach-daten/

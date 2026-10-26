@@ -1,5 +1,5 @@
 name: Preis-Korrektur
-description: Ein Preis in Abo-Coach stimmt nicht (Format abocoach.correction/1)
+description: Ein Preis in Volteule stimmt nicht (Format abocoach.correction/1)
 title: "Preis: "
 labels: ["preis-korrektur", "neu"]
 body:
