@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Achtung: Issues sind öffentlich.** Wenn dein Name hier nicht öffentlich stehen soll, schreib lieber eine Mail (siehe README).
+        **Achtung: Issues sind öffentlich.** Wenn dein Name hier nicht öffentlich stehen soll, schreib lieber eine Mail an volteule@swbmail.de.
         Wir brauchen nur den Betreibernamen, wie er in den Daten steht. Keine Adresse, Telefonnummer oder Standort angeben.
         Die Daten stammen aus dem Ladesäulenregister der Bundesnetzagentur; dort kannst du den Eintrag ebenfalls ändern lassen.
   - type: input

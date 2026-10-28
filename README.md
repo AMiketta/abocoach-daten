@@ -16,7 +16,7 @@ kompakte Stationsdaten. Der App-Code liegt in einem privaten Repo.
 
 In der App „Preis korrigieren“ antippen – das öffnet ein vorausgefülltes Issue
 ([Formular](https://github.com/AMiketta/abocoach-daten/issues/new?template=preis-korrektur.yml), Format `abocoach.correction/1`).
-Ohne GitHub-Konto geht es auch per Mail.
+Ohne GitHub-Konto geht es auch per Mail an **`volteule@swbmail.de`**.
 
 Regeln:
 - Übernommen wird ein Wert **nur mit öffentlicher Anbieterquelle** (Preisseite oder Preisblatt des Anbieters).
@@ -34,7 +34,7 @@ Standort und Leistung bleiben, weil sie für die Säulensuche nötig sind. Eine 
 `scripts/anonymize_overrides.json` (`force_private` als sha256-Hash, damit der Name dort nicht im Klartext steht; `keep` für Firmen).
 
 **Entfernung oder Korrektur beantragen:**
-- per **Mail** an **`<DATENSCHUTZ-MAILADRESSE FOLGT>`** (empfohlen, nicht öffentlich), oder
+- per **Mail** an **`volteule@swbmail.de`** (empfohlen, nicht öffentlich), oder
 - per [GitHub-Issue „Entfernung/Korrektur eines Betreibernamens“](https://github.com/AMiketta/abocoach-daten/issues/new?template=namensentfernung.yml).
   Issues sind öffentlich; nötig ist nur der Betreibername, wie er in den Daten steht.
 
